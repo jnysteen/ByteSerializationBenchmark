@@ -27,6 +27,7 @@ namespace ByteSerializationBenchmark.Tests
                 yield return new object[] {new BinaryFormatterByteConverter<string>()};
                 yield return new object[] {new MarshalByteConverter()};
                 yield return new object[] {new ProtoBufByteConverter<string>()};
+                yield return new object[] {new MessagePackByteConverter<string>()};
             }
         }
 
@@ -37,6 +38,7 @@ namespace ByteSerializationBenchmark.Tests
                 yield return new object[] {new JsonByteConverter<ComplexType>()};
                 yield return new object[] {new BinaryFormatterByteConverter<ComplexType>()};
                 yield return new object[] {new ProtoBufByteConverter<ComplexType>()};
+                yield return new object[] {new MessagePackByteConverter<ComplexType>()};
             }
         }
 

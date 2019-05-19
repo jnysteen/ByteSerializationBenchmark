@@ -7,6 +7,7 @@ using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Exporters.Csv;
 using BenchmarkDotNet.Order;
 using ByteSerialization;
+using MessagePack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using ProtoBuf;
@@ -52,6 +53,13 @@ namespace ByteSerializationBenchmark
             Converter = new ProtoBufByteConverter<ComplexType>();
             Input = CreateComplexType();
         }
+        
+        [GlobalSetup(Target = nameof(MessagePackByteConverterBenchmark))]
+        public void Setup_ZeroFormatterByteConverter()
+        {
+            Converter = new MessagePackByteConverter<ComplexType>();
+            Input = CreateComplexType();
+        }
 
         [Benchmark(Baseline = true, Description = "BinaryFormatter")]
         public void BinaryFormatterByteConverterBenchmark()
@@ -70,48 +78,51 @@ namespace ByteSerializationBenchmark
         {
             var bytes = Converter.GetBytes(Input);
         }
+        
+        [Benchmark(Description = "MessagePack")]
+        public void MessagePackByteConverterBenchmark()
+        {
+            var bytes = Converter.GetBytes(Input);
+        }
     }
 
-    [Serializable] // The BinaryFormatter requires this when serializing
-    [ProtoContract] // ProtoBuf requires this when serializing
+    [MessagePackObject] // MessagePack requires this
+    [Serializable] // The BinaryFormatter requires this
+    [ProtoContract] // ProtoBuf requires this
     public class ComplexType
     {
+        [Key(0)] // MessagePack requires this
         [DataMember] // The BinaryFormatter *might* require this 
         [JsonProperty]  // The JSON converter *might* require this
-        [ProtoMember(1)] // ProtoBuf requires this when serializing
-        public int Id { get; private set; }
+        [ProtoMember(1)] // ProtoBuf requires this
+        public int Id { get; set; }
 
+        [Key(1)] // ZeroFormatter requires this
         [DataMember] // The BinaryFormatter *might* require this 
         [JsonProperty]  // The JSON converter *might* require this
-        [ProtoMember(2)] // ProtoBuf requires this when serializing
-        public List<ComplexType> Children { get; set; }
+        [ProtoMember(2)] // ProtoBuf requires this
+        public IList<ComplexType> Children { get; set; }
 
         public static ComplexType Create(int childrenPerInstance, int depth)
         {
             var idSupplier = new IdSupplier();
-            var instance = new ComplexType()
-            {
-                Id = idSupplier.GetId()
-            };
-
-            if (depth == 0)
-                return instance;
-            
-            instance.Children = Enumerable.Repeat(Create(idSupplier, childrenPerInstance, depth - 1), childrenPerInstance).ToList();
-            return instance;
+            return Create(idSupplier, childrenPerInstance, depth);
         }
         
         private static ComplexType Create(IdSupplier idSupplier,int childrenPerInstance, int depth)
         {
             var instance = new ComplexType()
             {
-                Id = idSupplier.GetId()
+                Id = idSupplier.GetId(),
+                Children = new List<ComplexType>()
             };
 
             if (depth == 0)
                 return instance;
+
+            for (int i = 0; i < childrenPerInstance; i++)
+                instance.Children.Add(Create(idSupplier, childrenPerInstance, depth - 1));
             
-            instance.Children = Enumerable.Repeat(Create(idSupplier, childrenPerInstance, depth - 1), childrenPerInstance).ToList();
             return instance;
         }
 

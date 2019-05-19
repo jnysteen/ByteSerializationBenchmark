@@ -54,6 +54,13 @@ namespace ByteSerializationBenchmark
             Converter = new ProtoBufByteConverter<string>();
             TestString = GetTestString();
         }
+                
+        [GlobalSetup(Target = nameof(MessagePackByteConverterBenchmark))]
+        public void Setup_ZeroFormatterByteConverter()
+        {
+            Converter = new MessagePackByteConverter<string>();
+            TestString = GetTestString();
+        }
 
         [Benchmark(Baseline = true, Description = "BinaryFormatter")]
         public void BinaryFormatterByteConverterBenchmark()
@@ -75,6 +82,12 @@ namespace ByteSerializationBenchmark
         
         [Benchmark(Description = "ProtoBuf")]
         public void ProtoBufByteConverterBenchmark()
+        {
+            var bytes = Converter.GetBytes(TestString);
+        }
+        
+        [Benchmark(Description = "MessagePack")]
+        public void MessagePackByteConverterBenchmark()
         {
             var bytes = Converter.GetBytes(TestString);
         }
