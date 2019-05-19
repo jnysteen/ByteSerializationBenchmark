@@ -221,6 +221,8 @@ _pkginfo.txt
 # files ending in .cache can be ignored
 *.[Cc]ache
 # but keep track of directories ending in .cache
+
+
 !?*.[Cc]ache/
 
 # Others
@@ -420,3 +422,5 @@ fabric.properties
 **___jb_tmp___
 
 # End of https://www.gitignore.io/api/rider,csharp
+
+BenchmarkDotNet.Artifacts/
