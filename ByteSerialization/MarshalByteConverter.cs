@@ -8,10 +8,10 @@ namespace ByteSerialization
     {
         public unsafe byte[] GetBytes(string itemToSerialize)
         {
-            var tempByte = new byte[itemToSerialize.Length];
+            var tempByte = new byte[itemToSerialize.Length * 2];
             fixed (void* ptr = itemToSerialize)
             {
-                Marshal.Copy(new IntPtr(ptr), tempByte, 0, itemToSerialize.Length);
+                Marshal.Copy(new IntPtr(ptr), tempByte, 0, itemToSerialize.Length * 2);
             }
 
             return tempByte;
