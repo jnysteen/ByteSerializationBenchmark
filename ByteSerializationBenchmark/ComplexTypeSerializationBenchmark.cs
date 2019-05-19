@@ -95,7 +95,7 @@ namespace ByteSerializationBenchmark
         [DataMember] // The BinaryFormatter *might* require this 
         [JsonProperty]  // The JSON converter *might* require this
         [ProtoMember(1)] // ProtoBuf requires this
-        public int Id { get; set; }
+        public int Id { get; set; } // MessagePack requires the getter and setter to be public 
 
         [Key(1)] // ZeroFormatter requires this
         [DataMember] // The BinaryFormatter *might* require this 
