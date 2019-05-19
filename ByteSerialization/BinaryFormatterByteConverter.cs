@@ -5,13 +5,27 @@ namespace ByteSerialization
 {
     public class BinaryFormatterByteConverter<T> : IByteConverter<T>
     {
-        public byte[] GetBytes(T input)
+        private readonly BinaryFormatter _binaryFormatter;
+
+        public BinaryFormatterByteConverter()
+        {
+            _binaryFormatter = new BinaryFormatter();
+        }
+
+        public byte[] GetBytes(T itemToSerialize)
         {
             using (var ms = new MemoryStream())
             {
-                var binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(ms, input);
+                _binaryFormatter.Serialize(ms, itemToSerialize);
                 return ms.ToArray();
+            }
+        }
+
+        public T GetItem(byte[] itemToDeserialize)
+        {
+            using (var ms = new MemoryStream(itemToDeserialize))
+            {
+                return (T) _binaryFormatter.Deserialize(ms);
             }
         }
     }

@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteSerializationBenchmark"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteSerialization", "ByteSerialization\ByteSerialization.csproj", "{CACCD923-1225-426A-868F-1167A23CBE6B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteSerializationBenchmark.Tests", "ByteSerializationBenchmark.Tests\ByteSerializationBenchmark.Tests.csproj", "{947B22AB-4212-417B-868A-2E6597285742}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{CACCD923-1225-426A-868F-1167A23CBE6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CACCD923-1225-426A-868F-1167A23CBE6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CACCD923-1225-426A-868F-1167A23CBE6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{947B22AB-4212-417B-868A-2E6597285742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{947B22AB-4212-417B-868A-2E6597285742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{947B22AB-4212-417B-868A-2E6597285742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{947B22AB-4212-417B-868A-2E6597285742}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,7 +1,10 @@
+using System;
+
 namespace ByteSerialization
 {
     public interface IByteConverter<T>
     {
-        byte[] GetBytes(T input);
+        byte[] GetBytes(T itemToSerialize);
+        T GetItem(byte[] itemToDeserialize);
     }
 }
