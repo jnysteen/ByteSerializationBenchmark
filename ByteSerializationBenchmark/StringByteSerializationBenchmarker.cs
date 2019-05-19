@@ -17,38 +17,42 @@ namespace ByteSerializationBenchmark
     [CsvExporter(CsvSeparator.Semicolon), RPlotExporter]
     public class StringByteSerializationBenchmarker
     {
-        [Params(32)]
+        [Params(1000)]
         public int StringLength { get; set; }
         public IByteConverter<string> Converter { get; set; }
         public string TestString { get; set; }
-        
-        public StringByteSerializationBenchmarker()
+
+        private string GetTestString()
         {
-            TestString = string.Join("", Enumerable.Repeat("a", StringLength));
+            return new string('a', StringLength);
         }
 
         [GlobalSetup(Target = nameof(BinaryFormatterByteConverterBenchmark))]
         public void Setup_BinaryFormatterByteConverter()
         {
             Converter = new BinaryFormatterByteConverter<string>();
+            TestString = GetTestString();
         }
         
         [GlobalSetup(Target = nameof(JsonByteConverterBenchmark))]
         public void Setup_JsonByteConverter()
         {
             Converter = new JsonByteConverter<string>();
+            TestString = GetTestString();
         }
         
         [GlobalSetup(Target = nameof(MarshalByteConverterBenchmark))]
         public void Setup_MarshalByteConverter()
         {
             Converter = new MarshalByteConverter();
+            TestString = GetTestString();
         }
         
         [GlobalSetup(Target = nameof(ProtoBufByteConverterBenchmark))]
         public void Setup_ProtoBufByteConverter()
         {
             Converter = new ProtoBufByteConverter<string>();
+            TestString = GetTestString();
         }
 
         [Benchmark(Baseline = true, Description = "BinaryFormatter")]
