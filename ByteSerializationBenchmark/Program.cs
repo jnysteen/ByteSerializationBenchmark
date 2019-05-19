@@ -7,14 +7,8 @@ namespace ByteSerializationBenchmark
     {
         public static void Main(string[] args)
         {
-            var complex = ComplexType.Create(3, 3);
-
-            var converter = new JsonByteConverter<ComplexType>();
-            var serialized = converter.GetBytes(complex);
-            
-            
-//            var summary1 = BenchmarkRunner.Run<StringByteSerializationBenchmarker>();
-            var summary2 = BenchmarkRunner.Run<ComplexTypeSerializationBenchmark>();
+            BenchmarkRunner.Run<StringByteSerializationBenchmarker>();
+            BenchmarkRunner.Run<ComplexTypeSerializationBenchmark>();
         }
     }
 }
