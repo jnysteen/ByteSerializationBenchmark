@@ -17,7 +17,7 @@ namespace ByteSerializationBenchmark
     [CsvExporter(CsvSeparator.Semicolon), RPlotExporter]
     public class StringByteSerializationBenchmarker
     {
-        [Params(1000)]
+        [Params(50, 100, 200, 400)]
         public int StringLength { get; set; }
         public IByteConverter<string> Converter { get; set; }
         public string TestString { get; set; }

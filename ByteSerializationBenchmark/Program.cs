@@ -8,7 +8,7 @@ namespace ByteSerializationBenchmark
         public static void Main(string[] args)
         {
             BenchmarkRunner.Run<StringByteSerializationBenchmarker>();
-            BenchmarkRunner.Run<ComplexTypeSerializationBenchmark>();
+//            BenchmarkRunner.Run<ComplexTypeSerializationBenchmark>();
         }
     }
 }
