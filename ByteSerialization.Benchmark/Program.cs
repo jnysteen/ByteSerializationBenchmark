@@ -1,7 +1,6 @@
 using BenchmarkDotNet.Running;
-using ByteSerialization;
 
-namespace ByteSerializationBenchmark
+namespace ByteSerialization.Benchmark
 {
     public class Program
     {

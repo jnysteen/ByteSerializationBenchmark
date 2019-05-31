@@ -1,18 +1,15 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Exporters.Csv;
 using BenchmarkDotNet.Order;
-using ByteSerialization;
 using MessagePack;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using ProtoBuf;
 
-namespace ByteSerializationBenchmark
+namespace ByteSerialization.Benchmark
 {
     [CoreJob()]
     [MemoryDiagnoser]
@@ -97,7 +94,7 @@ namespace ByteSerializationBenchmark
         [ProtoMember(1)] // ProtoBuf requires this
         public int Id { get; set; } // MessagePack requires the getter and setter to be public 
 
-        [Key(1)] // ZeroFormatter requires this
+        [Key(1)] // MessagePack requires this
         [DataMember] // The BinaryFormatter *might* require this 
         [JsonProperty]  // The JSON converter *might* require this
         [ProtoMember(2)] // ProtoBuf requires this
