@@ -51,9 +51,23 @@ namespace ByteSerialization.Benchmark
         }
                 
         [GlobalSetup(Target = nameof(MessagePackByteConverterBenchmark))]
-        public void Setup_ZeroFormatterByteConverter()
+        public void Setup_MessagePackByteConverter()
         {
             Converter = new MessagePackByteConverter<string>();
+            TestString = GetTestString();
+        }
+        
+        [GlobalSetup(Target = nameof(UnicodeByteConverterBenchmark))]
+        public void Setup_UnicodeByteConverter()
+        {
+            Converter = new UnicodeByteConverter();
+            TestString = GetTestString();
+        }
+        
+        [GlobalSetup(Target = nameof(Utf8ByteConverterBenchmark))]
+        public void Setup_Utf8ByteConverter()
+        {
+            Converter = new Utf8ByteConverter();
             TestString = GetTestString();
         }
 
@@ -83,6 +97,18 @@ namespace ByteSerialization.Benchmark
         
         [Benchmark(Description = "MessagePack")]
         public void MessagePackByteConverterBenchmark()
+        {
+            var bytes = Converter.GetBytes(TestString);
+        }
+        
+        [Benchmark(Description = "Unicode")]
+        public void UnicodeByteConverterBenchmark()
+        {
+            var bytes = Converter.GetBytes(TestString);
+        }
+        
+        [Benchmark(Description = "UTF8")]
+        public void Utf8ByteConverterBenchmark()
         {
             var bytes = Converter.GetBytes(TestString);
         }
