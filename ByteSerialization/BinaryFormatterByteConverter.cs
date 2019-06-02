@@ -28,10 +28,5 @@ namespace ByteSerialization
                 return (T) _binaryFormatter.Deserialize(ms);
             }
         }
-
-        public override string ToString()
-        {
-            return "BinaryFormatter";
-        }
     }
 }

@@ -13,10 +13,5 @@ namespace ByteSerialization
         {
             return MessagePackSerializer.Deserialize<T>(objectToDeserialize);
         }
-        
-        public override string ToString()
-        {
-            return "MessagePack";
-        }
     }
 }
