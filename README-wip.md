@@ -41,7 +41,7 @@ All that's left now is to write the benchmarking code itself:
 
 When running the benchmark code on my machine, the following results are produced:
 
-### Benchmarking with `string`s
+### Benchmarking with `string`
 
 ![String serialization - benchmark](./results-for-docs/StringBenchmark-barplot.png)
 

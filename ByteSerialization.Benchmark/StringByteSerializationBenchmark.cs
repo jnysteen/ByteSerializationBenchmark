@@ -9,7 +9,7 @@ namespace ByteSerialization.Benchmark
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     [EncodingAttribute.Unicode]
     [MarkdownExporter, RPlotExporter]
-    public class StringByteSerializationBenchmarker
+    public class StringByteSerializationBenchmark
     {
         [Params(50, 100, 200)]
         public int StringLength { get; set; }
