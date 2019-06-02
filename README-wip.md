@@ -16,3 +16,22 @@ A quick search on Google and StackOverflow reveals many interesting alternatives
 * _Using ProtoBuf_: @TODO
 * _Using MessagePack_: https://github.com/neuecc/MessagePack-CSharp
 
+
+## Benchmarking implementations
+
+Before we can benchmark anything, we have to create whatever we're going to benchmark first (duh).
+
+We want to benchmark different ways of converting an object to a byte array - therefore, we define an interface for the required functionality first.
+
+@TODO - insert byteconverterinterface
+
+Using the identified alternatives to the `BinaryFormatter`, and the `BinaryFormatter` itself, we create implementations of the interface like this:
+
+@TODO - insert example of interface implementation with the binary formatter
+
+All that's left now is to write the benchmarking code itself:
+
+@TODO insert benchmarking code
+
+## Benchmark results
+
