@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ByteSerializationBenchmark\ByteSerializationBenchmark.csproj" />
+      <ProjectReference Include="..\ByteSerialization.Benchmark\ByteSerialization.Benchmark.csproj" />
       <ProjectReference Include="..\ByteSerialization\ByteSerialization.csproj" />
     </ItemGroup>
 

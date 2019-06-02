@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteSerializationBenchmark", "ByteSerializationBenchmark\ByteSerializationBenchmark.csproj", "{FF63284B-33D1-43D0-876B-5D8876E748BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteSerialization.Benchmark", "ByteSerialization.Benchmark\ByteSerialization.Benchmark.csproj", "{FF63284B-33D1-43D0-876B-5D8876E748BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteSerialization", "ByteSerialization\ByteSerialization.csproj", "{CACCD923-1225-426A-868F-1167A23CBE6B}"
 EndProject

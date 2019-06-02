@@ -1,13 +1,8 @@
-using System;
-using System.Collections;
-using System.Linq;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Exporters.Csv;
 using BenchmarkDotNet.Order;
-using ByteSerialization;
-using CommandLine;
 
-namespace ByteSerializationBenchmark
+namespace ByteSerialization.Benchmark
 {
     [CoreJob()]
     [MemoryDiagnoser]

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 using ByteSerialization;
+using ByteSerialization.Benchmark;
 using Xunit;
 using Xunit.Abstractions;
 
