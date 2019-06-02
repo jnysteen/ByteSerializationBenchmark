@@ -6,24 +6,22 @@ namespace ByteSerialization
 {
     public class MarshalByteConverter : IByteConverter<string>
     {
-        public unsafe byte[] GetBytes(string itemToSerialize)
+        public unsafe byte[] GetBytes(string objectToSerialize)
         {
-            var tempByte = new byte[itemToSerialize.Length * 2];
-            fixed (void* ptr = itemToSerialize)
+            var tempByte = new byte[objectToSerialize.Length * 2];
+            fixed (void* ptr = objectToSerialize)
             {
-                Marshal.Copy(new IntPtr(ptr), tempByte, 0, itemToSerialize.Length * 2);
+                Marshal.Copy(new IntPtr(ptr), tempByte, 0, objectToSerialize.Length * 2);
             }
 
             return tempByte;
         }
 
-        public unsafe string GetItem(byte[] itemToDeserialize)
+        public unsafe string GetObject(byte[] objectToDeserialize)
         {
-            return Encoding.Unicode.GetString(itemToDeserialize);
-            
-            fixed (void* ptr = itemToDeserialize)
+            fixed (void* ptr = objectToDeserialize)
             {
-                return Marshal.PtrToStringAuto(new IntPtr(ptr), itemToDeserialize.Length);
+                return Marshal.PtrToStringUni(new IntPtr(ptr), objectToDeserialize.Length / 2);
             }
         }
     }

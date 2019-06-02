@@ -4,14 +4,14 @@ namespace ByteSerialization
 {
     public class MessagePackByteConverter<T> : IByteConverter<T>
     {
-        public byte[] GetBytes(T itemToSerialize)
+        public byte[] GetBytes(T objectToSerialize)
         {
-            return MessagePackSerializer.Serialize(itemToSerialize);
+            return MessagePackSerializer.Serialize(objectToSerialize);
         }
 
-        public T GetItem(byte[] itemToDeserialize)
+        public T GetObject(byte[] objectToDeserialize)
         {
-            return MessagePackSerializer.Deserialize<T>(itemToDeserialize);
+            return MessagePackSerializer.Deserialize<T>(objectToDeserialize);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace ByteSerialization
 {
     public interface IByteConverter<T>
     {
-        byte[] GetBytes(T itemToSerialize);
-        T GetItem(byte[] itemToDeserialize);
+        byte[] GetBytes(T objectToSerialize);
+        T GetObject(byte[] objectToDeserialize);
     }
 }

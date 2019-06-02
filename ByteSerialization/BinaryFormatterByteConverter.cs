@@ -12,18 +12,18 @@ namespace ByteSerialization
             _binaryFormatter = new BinaryFormatter();
         }
 
-        public byte[] GetBytes(T itemToSerialize)
+        public byte[] GetBytes(T objectToSerialize)
         {
             using (var ms = new MemoryStream())
             {
-                _binaryFormatter.Serialize(ms, itemToSerialize);
+                _binaryFormatter.Serialize(ms, objectToSerialize);
                 return ms.ToArray();
             }
         }
 
-        public T GetItem(byte[] itemToDeserialize)
+        public T GetObject(byte[] objectToDeserialize)
         {
-            using (var ms = new MemoryStream(itemToDeserialize))
+            using (var ms = new MemoryStream(objectToDeserialize))
             {
                 return (T) _binaryFormatter.Deserialize(ms);
             }

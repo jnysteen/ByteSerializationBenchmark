@@ -5,15 +5,15 @@ namespace ByteSerialization
 {
     public class JsonByteConverter<T> : IByteConverter<T>
     {
-        public byte[] GetBytes(T itemToSerialize)
+        public byte[] GetBytes(T objectToSerialize)
         {
-            var jsonSerialized = JsonConvert.SerializeObject(itemToSerialize);
+            var jsonSerialized = JsonConvert.SerializeObject(objectToSerialize);
             return Encoding.UTF8.GetBytes(jsonSerialized);
         }
 
-        public T GetItem(byte[] itemToDeserialize)
+        public T GetObject(byte[] objectToDeserialize)
         {
-            return JsonConvert.DeserializeObject<T>(Encoding.UTF8.GetString(itemToDeserialize));
+            return JsonConvert.DeserializeObject<T>(Encoding.UTF8.GetString(objectToDeserialize));
         }
     }
 }

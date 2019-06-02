@@ -5,18 +5,18 @@ namespace ByteSerialization
 {
     public class ProtoBufByteConverter<T> : IByteConverter<T>
     {
-        public byte[] GetBytes(T itemToSerialize)
+        public byte[] GetBytes(T objectToSerialize)
         {
             using (var ms = new MemoryStream())
             {
-                Serializer.Serialize(ms, itemToSerialize);
+                Serializer.Serialize(ms, objectToSerialize);
                 return ms.ToArray();
             }
         }
 
-        public T GetItem(byte[] itemToDeserialize)
+        public T GetObject(byte[] objectToDeserialize)
         {
-            using (var ms = new MemoryStream(itemToDeserialize))
+            using (var ms = new MemoryStream(objectToDeserialize))
             {
                 return Serializer.Deserialize<T>(ms);
             }

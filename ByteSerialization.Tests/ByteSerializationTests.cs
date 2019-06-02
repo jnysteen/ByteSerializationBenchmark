@@ -49,7 +49,7 @@ namespace ByteSerializationBenchmark.Tests
         {
             const string s = "test-string";
             var serialized = byteConverter.GetBytes(s);
-            var deserialized = byteConverter.GetItem(serialized);
+            var deserialized = byteConverter.GetObject(serialized);
             Assert.Equal(s, deserialized);
         }
 
@@ -59,7 +59,7 @@ namespace ByteSerializationBenchmark.Tests
         {
             var complexType = ComplexType.Create(3, 3);
             var serialized = byteConverter.GetBytes(complexType);
-            var deserialized = byteConverter.GetItem(serialized);
+            var deserialized = byteConverter.GetObject(serialized);
 
             var expected = complexType.BreadthFirstEnumeration().ToArray();
             var actual = deserialized.BreadthFirstEnumeration().ToArray();
