@@ -12,7 +12,7 @@ namespace ByteSerialization.Benchmark
     [MarkdownExporter, RPlotExporter]
     public class StringByteSerializationBenchmark
     {
-        [Params(50, 100, 200)]
+        [Params(100)]
         public int StringLength { get; set; }
         public IByteConverter<string> Converter { get; set; }
         public string TestString { get; set; }
