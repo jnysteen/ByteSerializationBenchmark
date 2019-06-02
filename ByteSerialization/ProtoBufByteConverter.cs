@@ -21,5 +21,10 @@ namespace ByteSerialization
                 return Serializer.Deserialize<T>(ms);
             }
         }
+        
+        public override string ToString()
+        {
+            return "ProtoBuf";
+        }
     }
 }

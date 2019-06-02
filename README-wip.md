@@ -39,6 +39,8 @@ All that's left now is to write the benchmarking code itself:
 
 ## Benchmark results
 
+When running the benchmark code on my machine, the following results are produced:
+
 
 
 

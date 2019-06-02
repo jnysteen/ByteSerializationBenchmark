@@ -15,5 +15,10 @@ namespace ByteSerialization
         {
             return JsonConvert.DeserializeObject<T>(Encoding.UTF8.GetString(objectToDeserialize));
         }
+        
+        public override string ToString()
+        {
+            return "JSON";
+        }
     }
 }

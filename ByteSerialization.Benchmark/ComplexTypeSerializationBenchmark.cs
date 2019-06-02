@@ -11,7 +11,6 @@ using ProtoBuf;
 
 namespace ByteSerialization.Benchmark
 {
-    [CoreJob()]
     [MemoryDiagnoser]
     [RankColumn]
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]

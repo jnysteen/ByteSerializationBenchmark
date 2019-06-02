@@ -24,5 +24,10 @@ namespace ByteSerialization
                 return Marshal.PtrToStringUni(new IntPtr(ptr), objectToDeserialize.Length / 2);
             }
         }
+        
+        public override string ToString()
+        {
+            return "Marshal";
+        }
     }
 }

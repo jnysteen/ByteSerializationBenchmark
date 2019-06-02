@@ -4,7 +4,6 @@ using BenchmarkDotNet.Order;
 
 namespace ByteSerialization.Benchmark
 {
-    [CoreJob()]
     [MemoryDiagnoser]
     [RankColumn]
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
@@ -12,7 +11,7 @@ namespace ByteSerialization.Benchmark
     [MarkdownExporter, RPlotExporter]
     public class StringByteSerializationBenchmarker
     {
-        [Params(50, 100, 200, 400)]
+        [Params(50, 100, 200)]
         public int StringLength { get; set; }
         public IByteConverter<string> Converter { get; set; }
         public string TestString { get; set; }
