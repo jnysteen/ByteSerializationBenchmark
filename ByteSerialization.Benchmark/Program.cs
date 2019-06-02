@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Threading;
 using BenchmarkDotNet.Running;
 
 namespace ByteSerialization.Benchmark
@@ -6,8 +8,9 @@ namespace ByteSerialization.Benchmark
     {
         public static void Main(string[] args)
         {
-            BenchmarkRunner.Run<StringByteSerializationBenchmarker>();
-//            BenchmarkRunner.Run<ComplexTypeSerializationBenchmark>();
+            // Without the line below, parameters with decimals will be outputted with commas in certain cultures
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+            BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
         }
     }
 }
