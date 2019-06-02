@@ -1,6 +1,7 @@
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Exporters.Csv;
 using BenchmarkDotNet.Order;
+using ByteSerialization.StringOnly;
 
 namespace ByteSerialization.Benchmark
 {

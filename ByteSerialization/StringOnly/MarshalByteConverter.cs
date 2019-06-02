@@ -1,8 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
-using System.Text;
 
-namespace ByteSerialization
+namespace ByteSerialization.StringOnly
 {
     public class MarshalByteConverter : IByteConverter<string>
     {

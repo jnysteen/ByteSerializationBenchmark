@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using ByteSerialization;
 using ByteSerialization.Benchmark;
+using ByteSerialization.StringOnly;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -27,6 +28,8 @@ namespace ByteSerializationBenchmark.Tests
                 yield return new object[] {new JsonByteConverter<string>()};
                 yield return new object[] {new BinaryFormatterByteConverter<string>()};
                 yield return new object[] {new MarshalByteConverter()};
+                yield return new object[] {new UnicodeByteConverter()};
+                yield return new object[] {new Utf8ByteConverter()};
                 yield return new object[] {new ProtoBufByteConverter<string>()};
                 yield return new object[] {new MessagePackByteConverter<string>()};
             }
