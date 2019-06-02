@@ -9,7 +9,7 @@ namespace ByteSerialization.Benchmark
     [RankColumn]
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     [EncodingAttribute.Unicode]
-    [CsvExporter(CsvSeparator.Semicolon), RPlotExporter]
+    [MarkdownExporter, RPlotExporter]
     public class StringByteSerializationBenchmarker
     {
         [Params(50, 100, 200, 400)]
