@@ -30,7 +30,7 @@ Before we can benchmark anything, we have to create whatever we're going to benc
 
 ### Creating the implementations
 
-We want to benchmark different ways of converting an object to a byte array - therefore, we define an interface for the required functionality first.
+We want to benchmark different ways to achieve the same goal: converting an object to a byte array. Therefore, I define an interface `IByteConverter<T>` specifying the required functionality first:
 
 ``` csharp
 public interface IByteConverter<T>
@@ -75,9 +75,9 @@ public class BinaryFormatterByteConverter<T> : IByteConverter<T>
 
 All that's left now is to write the benchmarking code itself.
 
-[BencharkDotNet](https://github.com/dotnet/BenchmarkDotNet) - an awesome library for benchmarking .NET code - is used for benchmarking the implementations of the `IByteConverter<T>`.
+I use [BencharkDotNet](https://github.com/dotnet/BenchmarkDotNet) - an awesome library for benchmarking .NET code - for benchmarking the implementations of the `IByteConverter<T>`.
 
-The implementations are benchmarks with `T` being `string` and a custom type called `ComplexType`, which holds an object graph.
+Two benchmarks per implementation are created: One where `T` is `string`, and one where `T` is a custom type called `ComplexType`, which holds an object graph.
 
 The `string` benchmark of the `BinaryFormatterByteConverter` looks like this: 
 
@@ -102,9 +102,8 @@ public void BinaryFormatterByteConverterBenchmark()
 
 When running the benchmark code on my machine, the following results are produced:
 
-### Benchmarking with `string`
+### Benchmarking with `string` - results
 
-#### Results
 ![String serialization - benchmark](./results-for-docs/ByteSerialization.Benchmark.StringByteSerializationBenchmark-barplot.png)
 
 ``` ini
@@ -128,13 +127,7 @@ Runtime=Core  Toolchain=netcoreapp2.1
 |        ProtoBuf |          100 |   737.57 ns |  6.1722 ns |  5.4715 ns |  0.62 |    6 | 0.1450 |     - |     - |     688 B |
 | BinaryFormatter |          100 | 1,188.71 ns | 12.7686 ns | 11.3190 ns |  1.00 |    7 | 0.6008 |     - |     - |    2840 B |
 
-#### Results discussion
-The performance comparison of the implementations of `IByteConverter<T>`, where `T` is `string`, has a clear winner: `Marshal`.
-`Marshal` uses only 3% of the time used by `BinaryFormatter` (the absolute loser) for converting a `string` to bytes!
-
-
-
-### Benchmarking with complex types
+### Benchmarking with complex types - results
 ![Complex type serialization - benchmark](./results-for-docs/ByteSerialization.Benchmark.ComplexTypeSerializationBenchmark-barplot.png)
 
 ``` ini
@@ -156,7 +149,22 @@ Runtime=Core  Toolchain=netcoreapp2.1
 | BinaryFormatter | 116.973 μs | 0.4336 μs | 0.3621 μs |  1.00 |    4 | 9.0332 |     - |     - |  41.67 KB |
 
 
-### Results summary
+## Conclusion - what method should you choose?
+
+The performance comparison of the implementations of `IByteConverter<T>`, where `T` is `string`,
+ has a clear winner: `Marshal`. It comes as no surprise that `Marshal` is the winner, 
+ as copying the `string` directly from memory should be very fast. The surprise lies in _how much faster_ it is: It uses only 3% of the time used by `BinaryFormatter` (the absolute loser in both benchmarks) for converting a `string` to bytes!
+
+For the implementations where `T` is `ComplexType` and `Marshal` therefore cannot be used, `ProtoBuf` and `MessagePack` are the clear winners with very comparable performance characteristics, both using about 3% of the time used by `BinaryFormatter`.
+
+It is also worth noting that `BinaryFormatter` is not only the slowest method, but also _by far_ uses the most memory.
+
+So - when you need to serialize an object to bytes, how should you do it? The overall answer seems to be _"anything but `BinaryFormatter`"_.
+If you need to serialize `string`s only, you should go with copying the `string`s directly from memory. Otherwise, you should use [protobuf-net](https://github.com/mgravell/protobuf-net) or [MessagePack](https://github.com/neuecc/MessagePack-CSharp).
+
+
+
+
 
 Agenda:
 
