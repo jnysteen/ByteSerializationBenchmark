@@ -12,6 +12,9 @@ using Xunit.Abstractions;
 
 namespace ByteSerializationBenchmark.Tests
 {
+    /// <summary>
+    /// Tests that the converters actually serializes and deserializes correctly
+    /// </summary>
     public class ByteSerializationTests
     {
         private readonly ITestOutputHelper _testOutputHelper;
