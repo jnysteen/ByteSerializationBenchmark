@@ -150,13 +150,13 @@ Runtime=Core  Toolchain=netcoreapp2.1
 ## Conclusion - what method should you choose?
 
 The performance comparison of the implementations of `IByteConverter<T>`, where `T` is `string`,
- has a clear winner: `Marshal`. It comes as no surprise that `Marshal` is the winner, 
- as copying the `string` directly from memory should be very fast. The surprise lies in _how much faster_ it is: It uses only 3% of the time used by `BinaryFormatter` (the absolute loser in both benchmarks) for converting a `string` to bytes!
+ has a clear winner: `Marshal`. It comes as no surprise that `Marshal` is the winner, 
+ as copying the `string` directly from memory should be very fast. The surprise lies in _how much faster_ it is: It uses only 3% of the time used by `BinaryFormatter` (the absolute loser in both benchmarks) for converting a `string` to bytes!
 
-For the implementations where `T` is `ComplexType` and `Marshal` therefore cannot be used, `ProtoBuf` and `MessagePack` are the clear winners with very comparable performance characteristics, both using about 3% of the time used by `BinaryFormatter`.
+For the implementations where `T` is `ComplexType` and `Marshal` therefore cannot be used, `ProtoBuf` and `MessagePack` are the clear winners with very comparable performance characteristics, both using about 3% of the time used by `BinaryFormatter`.
 
-It is also worth noting that `BinaryFormatter` is not only the slowest method, but also _by far_ uses the most memory.
+It is also worth noting that `BinaryFormatter` is not only the slowest method, but also _by far_ uses the most memory.
 
 So - when you need to serialize an object to bytes, how should you do it? The overall answer seems to be _"anything but `BinaryFormatter`"_.
 
-If you need to serialize `string`s only, you should go with copying the `string`s directly from memory using `Marshal`. Otherwise, you should use [protobuf-net](https://github.com/mgravell/protobuf-net) or [MessagePack](https://github.com/neuecc/MessagePack-CSharp).
+If you need to serialize `string`s only, you should go with copying the `string`s directly from memory using `Marshal`. Otherwise, you should use [protobuf-net](https://github.com/mgravell/protobuf-net) or [MessagePack](https://github.com/neuecc/MessagePack-CSharp).
