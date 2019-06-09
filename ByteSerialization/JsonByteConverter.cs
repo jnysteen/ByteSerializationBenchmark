@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace ByteSerialization
 {
+    /// <summary>
+    /// Uses Newtonsoft.Json to serialize objects to bytes
+    /// </summary>
     public class JsonByteConverter<T> : IByteConverter<T>
     {
         public byte[] GetBytes(T objectToSerialize)

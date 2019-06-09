@@ -3,6 +3,9 @@ using ProtoBuf;
 
 namespace ByteSerialization
 {
+    /// <summary>
+    /// Uses ProtoBuf to serialize objects to bytes
+    /// </summary>
     public class ProtoBufByteConverter<T> : IByteConverter<T>
     {
         public byte[] GetBytes(T objectToSerialize)

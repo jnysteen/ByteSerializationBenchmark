@@ -3,6 +3,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace ByteSerialization
 {
+    /// <summary>
+    /// Uses the BinaryFormatter to serialize objects to bytes
+    /// </summary>
     public class BinaryFormatterByteConverter<T> : IByteConverter<T>
     {
         private readonly BinaryFormatter _binaryFormatter;

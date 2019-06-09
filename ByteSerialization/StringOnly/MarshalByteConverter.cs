@@ -3,6 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace ByteSerialization.StringOnly
 {
+    /// <summary>
+    /// Copies the bytes of the string directly from memory using Marshal
+    /// </summary>
     public class MarshalByteConverter : IByteConverter<string>
     {
         public unsafe byte[] GetBytes(string objectToSerialize)
