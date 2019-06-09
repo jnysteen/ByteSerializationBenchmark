@@ -6,8 +6,6 @@ of the CPU time was spent on serializing objects into bytes before feeding them 
 `Maybe.NET` uses `BinaryFormatter` for serializing objects into byte arrays - does a better method exist?
 Let's investigate!
 
-<!-- ## @TODO Why is `BinaryFormatter` so slow? -->
-
 ## Alternatives to `BinaryFormatter`
 
 A quick search on Google and StackOverflow reveals many interesting alternatives to `BinaryFormatter`:
@@ -19,8 +17,8 @@ A quick search on Google and StackOverflow reveals many interesting alternatives
 As I have a very specific use case concerning serialization of `string`s, a few `string`-specific serialization methods have been included: 
 
 * `string`s only:
-    * _Marshal_: By copying the `string` directly from memory into a byte array
-    * _UTF8_: By using the `Encoding.UTF8.GetBytes` method
+    * _Marshal_: Copying the `string` directly from memory into a byte array using `Marshal.Copy`
+    * _UTF8_: Using the `Encoding.UTF8.GetBytes` method
     * _Unicode (UTF16)_: By using the `Encoding.Unicode.GetBytes` method
 
 
@@ -160,15 +158,5 @@ For the implementations where `T` is `ComplexType` and `Marshal` therefore cann
 It is also worth noting that `BinaryFormatter` is not only the slowest method, but also _by far_ uses the most memory.
 
 So - when you need to serialize an object to bytes, how should you do it? The overall answer seems to be _"anything but `BinaryFormatter`"_.
-If you need to serialize `string`s only, you should go with copying the `string`s directly from memory. Otherwise, you should use [protobuf-net](https://github.com/mgravell/protobuf-net) or [MessagePack](https://github.com/neuecc/MessagePack-CSharp).
 
-
-
-
-
-Agenda:
-
-* What does this repo contain?
-    * Implementations of object-to-bytes serialization methods
-    * Benchmarks of those
-* Why does the repo contain this? (background)
+If you need to serialize `string`s only, you should go with copying the `string`s directly from memory using `Marshal`. Otherwise, you should use [protobuf-net](https://github.com/mgravell/protobuf-net) or [MessagePack](https://github.com/neuecc/MessagePack-CSharp).
