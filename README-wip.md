@@ -10,7 +10,7 @@ Let's investigate!
 
 A quick search on Google and StackOverflow reveals many interesting alternatives to `BinaryFormatter`:
 
-* _Through JSON_: Serializing the object into a JSON string and then convert the string into a bytes.
+* _Through JSON_: Serializing the object into a JSON string using [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json) and then convert the string into bytes.
 * _Using ProtoBuf_: Using the [protobuf-net](https://github.com/mgravell/protobuf-net) NuGet package, which implements Google's [Protocol buffers](https://developers.google.com/protocol-buffers/) to serialize objects into bytes.
 * _Using MessagePack_: By using [MessagePack](https://github.com/neuecc/MessagePack-CSharp), which is supposedly an _extremely_ fast serializer for C#.
 
