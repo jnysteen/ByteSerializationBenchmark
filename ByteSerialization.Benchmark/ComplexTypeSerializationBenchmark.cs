@@ -11,6 +11,9 @@ using ProtoBuf;
 
 namespace ByteSerialization.Benchmark
 {
+    /// <summary>
+    /// Benchmarks the implementations' performances when serializing complex types
+    /// </summary>
     [MemoryDiagnoser]
     [RankColumn]
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
@@ -18,42 +21,39 @@ namespace ByteSerialization.Benchmark
     [CsvExporter(CsvSeparator.Semicolon), RPlotExporter]
     public class ComplexTypeSerializationBenchmark
     {
+        /// <summary>
+        /// The converter used in each benchmark
+        /// </summary>
         public IByteConverter<ComplexType> Converter { get; set; }
+        
+        /// <summary>
+        /// The actual input to the serializer implementations
+        /// </summary>
         public ComplexType Input { get; set; }
         
+        /// <summary>
+        /// The number of children contained in every complex type instance
+        /// </summary>
         public int ChildrenPerInstance = 3;
+        
+        /// <summary>
+        /// The depth of the object graph generated for the root complex type instance 
+        /// </summary>
         public int Depth = 3;
 
+        /// <summary>
+        /// Produces the test input
+        /// </summary>
         private ComplexType CreateComplexType()
         {
             return ComplexType.Create(ChildrenPerInstance, Depth);
         }
-
+        
+        
         [GlobalSetup(Target = nameof(BinaryFormatterByteConverterBenchmark))]
         public void Setup_BinaryFormatterByteConverter()
         {
             Converter = new BinaryFormatterByteConverter<ComplexType>();
-            Input = CreateComplexType();
-        }
-
-        [GlobalSetup(Target = nameof(JsonByteConverterBenchmark))]
-        public void Setup_JsonByteConverter()
-        {
-            Converter = new JsonByteConverter<ComplexType>();
-            Input = CreateComplexType();
-        }
-
-        [GlobalSetup(Target = nameof(ProtoBufByteConverterBenchmark))]
-        public void Setup_ProtoBufByteConverter()
-        {
-            Converter = new ProtoBufByteConverter<ComplexType>();
-            Input = CreateComplexType();
-        }
-        
-        [GlobalSetup(Target = nameof(MessagePackByteConverterBenchmark))]
-        public void Setup_ZeroFormatterByteConverter()
-        {
-            Converter = new MessagePackByteConverter<ComplexType>();
             Input = CreateComplexType();
         }
 
@@ -62,17 +62,41 @@ namespace ByteSerialization.Benchmark
         {
             var bytes = Converter.GetBytes(Input);
         }
+        
+        
+        [GlobalSetup(Target = nameof(JsonByteConverterBenchmark))]
+        public void Setup_JsonByteConverter()
+        {
+            Converter = new JsonByteConverter<ComplexType>();
+            Input = CreateComplexType();
+        }
 
         [Benchmark(Description = "JSON")]
         public void JsonByteConverterBenchmark()
         {
             var bytes = Converter.GetBytes(Input);
         }
+        
+        
+        [GlobalSetup(Target = nameof(ProtoBufByteConverterBenchmark))]
+        public void Setup_ProtoBufByteConverter()
+        {
+            Converter = new ProtoBufByteConverter<ComplexType>();
+            Input = CreateComplexType();
+        }
 
         [Benchmark(Description = "ProtoBuf")]
         public void ProtoBufByteConverterBenchmark()
         {
             var bytes = Converter.GetBytes(Input);
+        }
+        
+        
+        [GlobalSetup(Target = nameof(MessagePackByteConverterBenchmark))]
+        public void Setup_ZeroFormatterByteConverter()
+        {
+            Converter = new MessagePackByteConverter<ComplexType>();
+            Input = CreateComplexType();
         }
         
         [Benchmark(Description = "MessagePack")]
